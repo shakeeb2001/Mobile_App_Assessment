@@ -25,7 +25,11 @@ This is a React Native application that allows users to sign up, sign in, and vi
 - npm or yarn
 - Firebase project setup (API keys)
 
-### Installation
+### Install dependencies
+
+npm install
+
+### Start the Metro bundler
 
 - npx expo start
 
