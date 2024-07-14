@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const CharacterListScreen = ({ navigation }) => {
+const CharacterListScreen = ({ navigation, onNavigateBack }) => {
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -19,7 +20,7 @@ const CharacterListScreen = ({ navigation }) => {
   }, []);
 
   const renderCharacter = ({ item }) => (
-    <TouchableOpacity onPress={() => navigation.navigate('CharacterDetail', { character: item })}>
+    <TouchableOpacity>
       <View style={styles.characterContainer}>
         <Image source={{ uri: item.imageUrl }} style={styles.image} />
         <Text style={styles.characterName}>{item.fullName}</Text>
@@ -29,6 +30,9 @@ const CharacterListScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity onPress={onNavigateBack} style={styles.button}>
+        <Text style={styles.buttonText}>Back to Home</Text>
+      </TouchableOpacity>
       {loading ? (
         <Text style={styles.loadingText}>Loading...</Text>
       ) : (
@@ -52,8 +56,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     marginBottom: 20,
-    textAlign: 'center',
-    color: '#fff',
+    textAlign: 'left',
+    color: '#ffcc00',
   },
   loadingText: {
     color: '#fff',
@@ -80,6 +84,18 @@ const styles = StyleSheet.create({
   },
   characterTitle: {
     color: '#ccc',
+  },
+  button: {
+    marginBottom: 20,
+    padding: 10,
+    
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#ffcc00',
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 
